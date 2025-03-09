@@ -167,7 +167,7 @@
         <ul>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is('qlkhachhang')|| request()->is('qlkhachhang/*')  ? 'active':''}}" href="{{route('qlkhachhang.index')}}">Quản lý khách hàng</a></li>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is('qldanhmuc') || request()->is('qldanhmuc/*') ? 'active':''}}" href="{{route('qldanhmuc.index')}}">Quản lý danh mục</a></li>
-            <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is('qlsanpham') || request()->is('qlsanphamg/*') ? 'active':''}}" href="{{route('qlsanpham.index')}}">Quản lý sản phẩm</a></li>
+            <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is('qlsanpham') || request()->is('qlsanpham/*') ? 'active':''}}" href="{{route('qlsanpham.index')}}">Quản lý sản phẩm</a></li>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is()}}" href="">Tables</a></li>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is()}}" href="">Charts</a></li>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;" class="{{request()->is()}}" href="">Icons</a></li>

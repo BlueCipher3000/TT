@@ -31,7 +31,7 @@ Route::get('/qldanhmuc',[CategoryController::class,'index'])->name('qldanhmuc.in
 Route::get('/qldanhmuc/find',[CategoryController::class,'find'])->name('qldanhmuc.find');
 
 Route::get('/qlsanpham',[ProductController::class,'index'])->name('qlsanpham.index');
-Route::get('/qlsanpham/find',[CategoryController::class,'find'])->name('qlsanpham.find');
+Route::get('/qlsanpham/find',[ProductController::class,'find'])->name('qlsanpham.find');
 
 Route::get('/themkhachhang',function (){
     return view('usermanager.themkhachhang');

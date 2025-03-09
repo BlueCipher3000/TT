@@ -2,7 +2,7 @@
 @section('namebuttonadd')
 <form action="{{route('qlsanpham.find')}}" method="GET">
     @csrf
-    <input type="text" name="name" placeholder="Nhập tên danh mục" required>
+    <input type="text" name="name" placeholder="Nhập tên sản phẩm" required>
     <button class="btn-search">Tìm kiếm</button>
 </form>
 <form action="{{route('product.create')}}" method="GET">
@@ -28,8 +28,8 @@
     </tr>
 </thead>
 <tbody>
-    <tr>
         @foreach ($result as $value)
+    <tr>
         <td>{{$value->name}}</td>
         <td>{{$value->price}} đ</td>
         <td>{{$value->sale}}%</td>
@@ -54,7 +54,8 @@
                 <button style="margin-top: 5px" class="btn-red">Delete</button>
             </form>
         </td>
-        @endforeach 
     </tr>
+        @endforeach 
+    
 </tbody>
 @endsection

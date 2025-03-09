@@ -145,6 +145,7 @@ class ProductController extends Controller
         return redirect()->route('qlsanpham.index');
     }
     public function find(Request $request){
-
+        $result = Product::where('name','LIKE',$request->name)->get();
+        return view('productmanager.qlsanpham',compact('result'));
     }
 }
