@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Stmt\ClassLike;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,9 @@ Route::get('/login',function ()  {
 })->name('login');
 
 Route::post('/login', [LoginController::class,'index'])->name('login.index');
+Route::get('/register',[RegisterController::class,'index']);
+Route::post('/register/createaccout',[RegisterController::class , 'createaccout'])->name('register.createaccout');
+Route::get('/email', [EmailController::class,'sendemail'])->name('email.sendemail');
 Route::get('/quantri', function () {
     return view('admin.quantri');
 });
