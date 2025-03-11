@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -24,7 +25,17 @@ Route::get('/login',function ()  {
 })->name('login');
 
 Route::post('/login', [LoginController::class,'index'])->name('login.index');
-Route::get('/register',[RegisterController::class,'index']);
+Route::get('/register',[RegisterController::class,'index'])->name('register');
+Route::get('/forgotpassword',[ForgotPasswordController::class,'index'])->name('forgotpassword.index');
+Route::post('/forgotpassword/submit_token_to_email',[ForgotPasswordController::class,'submit_token_to_email'])->name('forgotpassword.submit_token_to_email');
+Route::get('/forgotpassword/submit_token_to_email/confirmcode/{user}',[ForgotPasswordController::class,'confirmcode'])->name('forgotpassword.confirmcode');
+Route::post('/forgotpassword/submit_token_to_email/confirmcode/check_confirmation_code/{user}',[ForgotPasswordController::class,'check_confirmation_code'])
+->name('forgotpassword.check_confirmation_code');
+Route::get('/forgotpassword/submit_token_to_email/confirmcode/check_confirmation_code/forgotpassword/{user}',[ForgotPasswordController::class,'forgotpassword'])
+->name('forgotpassword.forgotpassword');//route trả về view forgotpassword
+Route::put('/forgotpassword/submit_token_to_email/confirmcode/check_confirmation_code/resetpassword/{user}',[ForgotPasswordController::class,'resetpassword'])
+->name('forgotpassword.resetpassword');
+
 Route::post('/register/createaccout',[RegisterController::class , 'createaccout'])->name('register.createaccout');
 Route::get('/email', [EmailController::class,'sendemail'])->name('email.sendemail');
 Route::get('/quantri', function () {

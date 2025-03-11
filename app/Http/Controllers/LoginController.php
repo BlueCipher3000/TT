@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     //
     public function index(Request $request){
-        $user = User::where('name',$request->name)->first();
+        $user = User::where('email',$request->email)->first();
         
         // Thử đăng nhập
         if ($user) {//kiểm tra tài khoản
