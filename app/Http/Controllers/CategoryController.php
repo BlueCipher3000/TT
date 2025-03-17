@@ -29,17 +29,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $image = $request->file('img');
+        $imgName = $image ? $image->getClientOriginalName() : 'default.png';
         //kiểm tra tên file (validate)
-        $caategory = Category::create([
+        $category = Category::create([
             'name' =>$request->name,
             'describe'=> $request->description,
-            'img' => $request->file('img')->getClientOriginalName(),
+            'img' => $imgName,
             'status' => $request->status,
         ]);
-        if($caategory){
-            $image = $request->file('img');
-            $imgName = $image->getClientOriginalName(); 
-            $image->move(public_path('storage/imgcategories'), $imgName);
+        if($category){
+            if ($image)
+                $image->move(public_path('storage/imgcategories'), $imgName);
             return redirect()->route('qldanhmuc.index');
         }else{
             //thong bao loi
@@ -67,16 +68,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update([
-            'name' =>$request->name,
-            'describe'=> $request->description,
-            'img' => $request->file('img')->getClientOriginalName(),
+        $image = $request->file('img');
+        $imgName = $image ? $image->getClientOriginalName() : 'default.png';
+
+        $category = Category::create([
+            'name' => $request->name,
+            'describe' => $request->description,
+            'img' => $imgName, // Save the image name to the database
             'status' => $request->status,
         ]);
-        if($category){
-            $image = $request->file('img');
-            $imgName = $image->getClientOriginalName(); 
-            $image->move(public_path('storage/imgcategories'), $imgName);
+
+        if ($category) {
+            if ($image) { // Only move the image if a file was uploaded
+                $image->move(public_path('storage/imgcategories'), $imgName);
+            }
             return redirect()->route('qldanhmuc.index');
         }else{
             //thong bao loi

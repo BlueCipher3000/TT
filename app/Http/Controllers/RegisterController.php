@@ -9,15 +9,19 @@ class RegisterController extends Controller
 {
     //
     public function index(){
-        return view('register.register');
+        return view('Register.register');
     }
     public function createaccout(Request $request){
         $image = $request->file('img');
-        $imgName = $image->getClientOriginalName(); 
-        if($request->role == 1){
-            $image->move(public_path('storage'), $imgName);
-        }else{
-            $image->move(public_path('storage/imgusers'), $imgName);
+        if ($request->hasFile('img')) {
+            $imgName = $image->getClientOriginalName();
+            if ($request->role == 1) {
+                $image->move(public_path('storage'), $imgName);
+            } else {
+                $image->move(public_path('storage/imgusers'), $imgName);
+            }
+        } else {
+            $imgName = 'default.jpg';
         }
         $user = User::create([
             'name' => $request->name,
@@ -29,7 +33,7 @@ class RegisterController extends Controller
             'address' => $request->address,
             'img' => $imgName,
             'role' => $request->role,
-            'statu' => $request->statu,
+            'status' => $request->status,
         ]);
         if($user){
             //chuyen den form cua user

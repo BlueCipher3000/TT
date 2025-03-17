@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'name', 'describe', 'img', 'status'];
+    protected $fillable = [ 'name', 'description', 'img', 'status'];
+
+    public function ReferencesProduct() {
+        return $this->hasMany(Product::class);
+    }
 }

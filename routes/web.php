@@ -20,8 +20,12 @@ use PhpParser\Node\Stmt\ClassLike;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
 Route::get('/login',function ()  {
-    return view('login.login');
+    return view('Login.login');
 })->name('login');
 
 Route::post('/login', [LoginController::class,'index'])->name('login.index');
