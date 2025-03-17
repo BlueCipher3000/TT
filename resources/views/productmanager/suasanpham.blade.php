@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Mô tả</label>
-                <input type="text" class="form-control" name="discribe" value="{{$product->discribe}}">
+                <input type="text" class="form-control" name="description" value="{{$product->description}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Hình ảnh</label>

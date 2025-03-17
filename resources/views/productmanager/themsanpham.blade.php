@@ -32,7 +32,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Mô tả</label>
-                <input type="text" class="form-control" name="discribe">
+                <input type="text" class="form-control" name="description">
             </div>
             <div class="mb-3">
                 <label class="form-label">Hình ảnh</label>
@@ -51,7 +51,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Số lượng bán ra</label>
-                <input type="number" class="form-control" name="toyal_pay">
+                <input type="number" class="form-control" name="total_pay">
             </div>
             <div class="mb-3">
                 <label class="form-label">Số lượng đánh giá</label>

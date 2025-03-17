@@ -21,7 +21,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categorymanager.themdanhmuc');
+        $result = Category::all();
+        return view('categorymanager.themdanhmuc', compact('result'));
     }
 
     /**
@@ -41,9 +42,9 @@ class CategoryController extends Controller
         if($category){
             if ($image)
                 $image->move(public_path('storage/imgcategories'), $imgName);
-            return redirect()->route('qldanhmuc.index');
+            return redirect()->route('qldanhmuc.index')->with('success','Thêm mới thành công');
         }else{
-            //thong bao loi
+            return back()->with('error','Thêm mới thất bại');
         }
     }
 
@@ -70,21 +71,19 @@ class CategoryController extends Controller
     {
         $image = $request->file('img');
         $imgName = $image ? $image->getClientOriginalName() : 'default.png';
-
-        $category = Category::create([
+        //kiểm tra tên file (validate)
+        $updated = $category->update([
             'name' => $request->name,
-            'describe' => $request->description,
-            'img' => $imgName, // Save the image name to the database
+            'describe'=> $request->description,
+            'img' => $imgName,
             'status' => $request->status,
         ]);
-
-        if ($category) {
-            if ($image) { // Only move the image if a file was uploaded
+        if($updated){
+            if ($image)
                 $image->move(public_path('storage/imgcategories'), $imgName);
-            }
-            return redirect()->route('qldanhmuc.index');
+            return redirect()->route('qldanhmuc.index')->with('success','Cập nhật thành công');
         }else{
-            //thong bao loi
+            return back()->with('error','Cập nhật thất bại');
         }
     }
 

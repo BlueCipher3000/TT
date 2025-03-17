@@ -68,7 +68,7 @@
             <input type="text" id="name" name="name" value="{{$category->name}}" required>
 
             <label for="description">Mô tả:</label>
-            <textarea id="description" name="description" >{{$category->describe}}</textarea>
+            <textarea id="description" name="description" >{{$category->description}}</textarea>
 
             <label for="img">Hình Ảnh:</label>
             <input type="file" id="img" name="img">

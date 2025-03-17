@@ -37,7 +37,7 @@ class ProductController extends Controller
             'price' => 'required|integer|min:0',
             'sale' => 'nullable|integer|min:0|max:100',
             'hot' => 'required|boolean',
-            'discribe' => 'nullable|string',
+            'description' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'nullable|string',
             'status' => 'required|boolean',
@@ -53,18 +53,18 @@ class ProductController extends Controller
             'price' => $request->price,
             'sale' => $request->sale ?? 0,
             'hot' => $request->hot,
-            'discribe' => $request->discribe,
+            'description' => $request->description,
             'img' => $request->file('img')->getClientOriginalName(),
             'content' => $request->content,
             'status' => $request->status,
-            'toyal_pay' => $request->toyal_pay ?? 0,
+            'total_pay' => $request->total_pay ?? 0,
             'total_rating' => $request->total_rating ?? 0,
             'total_stars' => $request->total_stars ?? 0,
             'category_id' => $request->category_id,
         ]);
         if($product){
             $image = $request->file('img');
-            $imgName = $image->getClientOriginalName(); 
+            $imgName = $image->getClientOriginalName();
             $image->move(public_path('storage/imgproducts'), $imgName);
             return redirect()->route('qlsanpham.index');
         }else{
@@ -100,7 +100,7 @@ class ProductController extends Controller
             'price' => 'required|integer|min:0',
             'sale' => 'nullable|integer|min:0|max:100',
             'hot' => 'required|boolean',
-            'discribe' => 'nullable|string',
+            'description' => 'nullable|string',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'nullable|string',
             'status' => 'required|boolean',
@@ -116,7 +116,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'sale' => $request->sale ?? 0,
             'hot' => $request->hot,
-            'discribe' => $request->discribe,
+            'description' => $request->description,
             'img' => $request->file('img')->getClientOriginalName(),
             'content' => $request->content,
             'status' => $request->status,
@@ -127,7 +127,7 @@ class ProductController extends Controller
         ]);
         if($product){
             $image = $request->file('img');
-            $imgName = $image->getClientOriginalName(); 
+            $imgName = $image->getClientOriginalName();
             $image->move(public_path('storage/imgproducts'), $imgName);
             return redirect()->route('qlsanpham.index');
         }else{

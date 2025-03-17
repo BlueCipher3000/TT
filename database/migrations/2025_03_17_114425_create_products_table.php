@@ -20,9 +20,9 @@ return new class extends Migration
             $table->text('description');
             $table->string('img');
             $table->text('content');
-            $table->integer('status');
+            $table->boolean('status');
             $table->integer('total_pay');
-            $table->integer('total_rating');
+            $table->double('total_rating');
             $table->integer('total_stars');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();

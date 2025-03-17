@@ -23,7 +23,7 @@
                 @foreach ($result as $value)
                 <tr>
                     <td>{{$value->name}}</td>
-                    <td>{{$value->describe}}</td>
+                    <td>{{$value->description}}</td>
                     <td><img style="max-width: 150px;height: auto;display: block;margin: auto;"src="{{asset('storage/imgcategories/'.$value->img)}}" alt=""></td>
                     <td>{{$value->status}}</td>
                     <td>

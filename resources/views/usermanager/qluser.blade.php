@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('Layout.layout')
 @section('namebuttonadd')
 <form action="{{route('qlkhachhang.find')}}" method="GET">
     @csrf
@@ -67,7 +67,7 @@
         <td>
             <form action="{{route('khachhang.edit',$value)}}" method="GET">
                 @csrf
-                <button class="btn-blue">Edit</button> 
+                <button class="btn-blue">Edit</button>
             </form>
             <form action="{{route('khachhang.destroy', $value)}}" method="POST">
                 @csrf
