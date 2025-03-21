@@ -28,7 +28,14 @@ Route::get('/login',function ()  {
     return view('Login.login');
 })->name('login');
 
-Route::post('/login', [LoginController::class,'index'])->name('login.index');
+Route::post('/login', [LoginController::class,'login'])->name('login.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/quantri', function () {
+        return view('admin.quantri');
+    })->name('admin.quantri');
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::get('/forgotpassword',[ForgotPasswordController::class,'index'])->name('forgotpassword.index');
 Route::post('/forgotpassword/submit_token_to_email',[ForgotPasswordController::class,'submit_token_to_email'])->name('forgotpassword.submit_token_to_email');
@@ -42,11 +49,10 @@ Route::put('/forgotpassword/submit_token_to_email/confirmcode/check_confirmation
 
 Route::post('/register/createaccout',[RegisterController::class , 'createaccout'])->name('register.createaccout');
 Route::get('/email', [EmailController::class,'sendemail'])->name('email.sendemail');
-Route::get('/quantri', function () {
-    return view('admin.quantri');
-});
+
 Route::get('/qlkhachhang',[UserController::class,'index'])->name('qlkhachhang.index');
 Route::get('/qlkhachhang/find',[UserController::class,'find'])->name('qlkhachhang.find');
+Route::get('/qlkhachhang/create',[UserController::class,'create'])->name('qlkhachhang.create');
 
 Route::get('/qldanhmuc',[CategoryController::class,'index'])->name('qldanhmuc.index');
 Route::get('/qldanhmuc/find',[CategoryController::class,'find'])->name('qldanhmuc.find');
@@ -59,7 +65,7 @@ Route::get('/themkhachhang',function (){
 })->name('themkhachhang');
 Route::get('/themdanhmuc',[CategoryController::class,'create'])->name('category.create');
 Route::resources([
-    'khachhang' => UserController::class,
+    'user' => UserController::class,
     'category' => CategoryController::class,
     'product' => ProductController::class,
 ]);

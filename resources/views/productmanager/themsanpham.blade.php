@@ -69,7 +69,10 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+            <div>
+                <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+                <a href="{{route('qlsanpham.index')}}" class="btn btn-secondary">Quay lại</a>
+            </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

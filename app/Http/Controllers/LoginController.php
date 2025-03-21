@@ -2,31 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
-    //
-    public function index(Request $request){
-        $user = User::where('email',$request->email)->first();
-        
-        // Thử đăng nhập
-        if ($user) {//kiểm tra tài khoản
-            if($request->password==$user->password){
-                if($user->role == 1){
-                    return view('admin.quantri');
-                }
-                else{
-                    //trang user
-                }
-            }else{
-                return redirect()->route('login')->withErrors(['login' => 'Sai tài khoản hoặc mật khẩu!']);
-            }
-        }else{
-            return redirect()->route('login')->withErrors(['login' => 'Sai tài khoản hoặc mật khẩu!']);
+    public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('username', $request->username)->first();
+
+        if (!$user || $request->password !== $user->password) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
         }
+
+        Auth::login($user);
+
+        return redirect()->route('admin.quantri');
 
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Logs out the user
+
+        $request->session()->invalidate(); // Invalidates the session
+        $request->session()->regenerateToken(); // Prevents CSRF attacks
+
+        return redirect()->route('login.index'); // Redirect to login page
+    }
 }

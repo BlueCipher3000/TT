@@ -70,7 +70,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $image = $request->file('img');
-        $imgName = $image ? $image->getClientOriginalName() : 'default.png';
+        $imgName = $category->img;
         //kiểm tra tên file (validate)
         $updated = $category->update([
             'name' => $request->name,

@@ -113,7 +113,7 @@
             @csrf
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="email" name="email" required>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu:</label>
@@ -136,7 +136,7 @@
                 {{ $errors->first('login') }}
             </div>
             @endif
-            <button>Đăng nhập</button>
+            <button type="submit">Đăng nhập</button>
         </form>
     </div>
 </body>

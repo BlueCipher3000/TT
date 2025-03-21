@@ -6,76 +6,50 @@
     <button class="btn-search">Tìm kiếm</button>
 </form>
 <form action="{{route('themkhachhang')}}" method="GET">
-    <button class="btn-green">+ Thêm khách hàng mới</button>
+    <button class="btn-green">+ Thêm user mới</button>
 </form>
 @endsection
 @section('content')
-<thead>
-    <tr>
-        <th>Tên đăng nhập</th>
-        <th>Giới tính</th>
-        <th>Ngày sinh</th>
-        <th>SDT</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Địa chỉ</th>
-        <th>Ảnh đại diện</th>
-        <th>Loại</th>
-        <th>Trạng thái</th>
-        <th></th>
-    </tr>
-</thead>
-<tbody>
-    @foreach ( $result as $value)
-    <tr>
-        <td>{{$value->name}}</td>
-        <td>
-            @if ($value->gender == 1)
-            {{"Nam"}}
-        @elseif($value->gender == 2)
-            {{"Nữ"}}
-        @else
-            {{"Khác"}}
-        @endif
-        </td>
-        <td>{{$value->birthday}}</td>
-        <td>{{$value->phone}}</td>
-        <td>{{$value->email}}</td>
-        <td>{{$value->password}}</td>
-        <td>{{$value->address}}</td>
-        <td>
-            @if ($value->role == 1)
-            <img height="100px" width="100px" style="border-radius: 50%;" src="{{ asset('storage/'.$value->img)}}" alt="">
-            @else
-            <img height="100px" width="100px" style="border-radius: 50%;" src="{{ asset('storage/imgusers/'.$value->img)}}" alt="">
-            @endif
-        </td>
-        <td>
-            @if ($value->role == 1)
-            {{"Amin"}}
-        @else
-            {{"Khách hàng"}}
-        @endif
-        </td>
-        <td>
-            @if ($value->statu == 1)
-                {{"Hoạt động"}}
-            @else
-                {{"Khóa"}}
-            @endif
-        </td>
-        <td>
-            <form action="{{route('khachhang.edit',$value)}}" method="GET">
-                @csrf
-                <button class="btn-blue">Edit</button>
-            </form>
-            <form action="{{route('khachhang.destroy', $value)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button style="margin-top: 5px" class="btn-red">Delete</button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên đăng nhập</th>
+            <th>Ảnh</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>
+                    <img src="{{ asset('storage/imgusers/' . $user->img) }}"
+                         alt="Avatar"
+                         width="40"
+                         style="border-radius: 50%;">
+                </td>
+                <td>
+                    @if ($user->privilege == 0)
+                        ROOT
+                    @elseif ($user->privilege == 1)
+                        Quản trị viên
+                    @else
+                        Người kiểm duyệt
+                    @endif
+                </td>
+                @unless($user->privilege == 0)
+                <td>
+                    <a href="{{ route('user.edit', $user) }}" class="btn-blue">Sửa</a>
+                    <form action="{{ route('user.destroy', $user) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-red">Xóa</button>
+                    </form>
+                </td>
+                @endunless
+            </tr>
+        @endforeach
+    </tbody>
 @endsection

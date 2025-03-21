@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('price');
             $table->integer('sale');
             $table->integer('hot');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('img');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->boolean('status');
             $table->integer('total_pay');
             $table->double('total_rating');
