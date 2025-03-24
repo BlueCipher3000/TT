@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Thêm Người Dùng</title>
     <style>
         body {
@@ -82,9 +83,13 @@
         <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="username">Tên người dùng:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" value="{{ old('username') }}" required>
+            @if ($errors->has('username'))
+                <div class="text-danger">{{ $errors->first('username') }}</div>
+            @endif
+
             <label for="name">Họ và Tên:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" value="{{ old('name')}}" required>
 
             <label for="gender">Giới Tính:</label>
             <select id="gender" name="gender">
@@ -129,5 +134,6 @@
 
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
