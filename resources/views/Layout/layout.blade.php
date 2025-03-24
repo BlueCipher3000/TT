@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -32,6 +33,8 @@
 
         .profile img {
             width: 60px;
+            height: 60px;
+            object-fit: fill;
             border-radius: 50%;
             transition: transform 0.3s ease;
         }
@@ -227,6 +230,20 @@
 </head>
 
 <body>
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show z-2" role="alert">
+            <strong>Lỗi!</strong> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show z-2" role="alert">
+            <strong>Thành công!</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="sidebar">
         <h2>CORONA</h2>
         <div class="profile">
@@ -236,13 +253,14 @@
             <span>
                 Vai trò:
                 @if(auth()->user()->privilege == 0)
-                    ROOT
+                    ROOT <br />
                 @elseif(auth()->user()->privilege == 1)
                     Quản trị viên
                 @else
                     Người kiểm duyệt
                 @endif
             </span>
+            <a class="btn btn-primary" href="{{ route('profile.edit') }}">Sửa hồ sơ</a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>
@@ -279,6 +297,7 @@
             @yield('content')
         </table>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

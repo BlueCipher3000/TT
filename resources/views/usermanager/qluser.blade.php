@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Tên đăng nhập</th>
+            <th>Họ và tên</th>
             <th>Ảnh</th>
             <th>Vai trò</th>
             <th>Hành động</th>
@@ -28,6 +28,8 @@
                     <img src="{{ asset('storage/imgusers/' . $user->img) }}"
                          alt="Avatar"
                          width="40"
+                         height="40"
+                         object-fit="fill"
                          style="border-radius: 50%;">
                 </td>
                 <td>

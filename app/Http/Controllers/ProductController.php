@@ -66,9 +66,9 @@ class ProductController extends Controller
             $image = $request->file('img');
             $imgName = $image->getClientOriginalName();
             $image->move(public_path('storage/imgproducts'), $imgName);
-            return redirect()->route('qlsanpham.index');
+            return redirect()->route('qlsanpham.index')->with('success','Thêm mới thành công');
         }else{
-            //thong bao loi
+            return back()->with('error','Thêm mới thất bại');
         }
     }
 
@@ -129,9 +129,9 @@ class ProductController extends Controller
             $image = $request->file('img');
             $imgName = $image->getClientOriginalName();
             $image->move(public_path('storage/imgproducts'), $imgName);
-            return redirect()->route('qlsanpham.index');
+            return redirect()->route('qlsanpham.index')->with('success','Cập nhật thành công');
         }else{
-            //thong bao loi
+            return back()->with('error','Cập nhật thất bại');
         }
     }
 
@@ -142,7 +142,7 @@ class ProductController extends Controller
     {
         //
         $product->delete();
-        return redirect()->route('qlsanpham.index');
+        return redirect()->route('qlsanpham.index')->with('success','Xóa thành công');
     }
     public function find(Request $request){
         $result = Product::where('name','LIKE',$request->name)->get();

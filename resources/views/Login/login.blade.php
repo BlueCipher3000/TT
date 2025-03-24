@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,11 +98,28 @@
         .forgot-password a:hover {
             text-decoration: underline;
         }
+
+        .error-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
+
 <body>
+    @if(session('error'))
+        <div class="error-message">
+            {{session('error')}}
+        </div>
+    @endif
     <!-- Nút đăng ký -->
-    <div class="register-container">
+    <div class="register-container" style="display: none;">
         <form action="{{route('register')}}" method="GET">
             <button class="register-button">Đăng ký</button>
         </form>
@@ -123,21 +141,22 @@
                 </div>
             </div>
             @if ($errors->has('login'))
-            <div style="background-color: #ffebee; /* Nền đỏ nhạt */
-    color: #d32f2f; /* Màu chữ đỏ đậm */
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    border: 1px solid #d32f2f;
-    margin-bottom: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);">
-                {{ $errors->first('login') }}
-            </div>
+                        <div style="background-color: #ffebee; /* Nền đỏ nhạt */
+                color: #d32f2f; /* Màu chữ đỏ đậm */
+                padding: 10px;
+                border-radius: 5px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: bold;
+                border: 1px solid #d32f2f;
+                margin-bottom: 10px;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);">
+                            {{ $errors->first('login') }}
+                        </div>
             @endif
             <button type="submit">Đăng nhập</button>
         </form>
     </div>
 </body>
+
 </html>

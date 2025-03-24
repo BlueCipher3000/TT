@@ -90,9 +90,9 @@
 
             <label for="gender">Giới Tính:</label>
             <select id="gender" name="gender">
-                <option value="0">Nam</option>
-                <option value="1">Nữ</option>
-                <option value="">Khác</option>
+                <option value="0" {{ $user->gender === 0 ? 'selected' : ''}}>Nam</option>
+                <option value="1" {{ $user->gender === 1 ? 'selected' : ''}}>Nữ</option>
+                <option value="" {{ $user->gender === null ? 'selected' : ''}}>Khác</option>
             </select>
 
             {{-- <label for="birthday">Ngày Sinh:</label>
@@ -115,8 +115,8 @@
 
             <label for="privilege">Vai Trò:</label>
             <select id="privilege" name="privilege">
-                <option value="1">Quản trị viên</option>
-                <option value="2">Người kiểm duyệt</option>
+                <option value="1" {{ $user->privilege === 1 ? 'selected' : ''}}>Quản trị viên</option>
+                <option value="2" {{ $user->privilege === 2 ? 'selected' : ''}}>Người kiểm duyệt</option>
             </select>
 
             <label for="status">Trạng Thái:</label>

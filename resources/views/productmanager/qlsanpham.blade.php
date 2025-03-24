@@ -34,12 +34,12 @@
         <td>{{$value->price}} đ</td>
         <td>{{$value->sale}}%</td>
         <td>{{$value->hot == 0 ? 'Không' : 'Có'}}</td>
-        <td>{{$value->discribe}}</td>
+        <td>{{$value->description}}</td>
         <td><img src="{{asset('storage/imgproducts/'.$value->img)}}" alt="Hình ảnh"
             style="max-width: 150px;height: auto;display: block;margin: auto;"></td>
         <td>{{$value->content}}</td>
         <td>{{$value->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
-        <td>{{$value->toyal_pay}}</td>
+        <td>{{$value->total_pay}}</td>
         <td>{{$value->total_rating}}</td>
         <td>{{$value->total_stars}}</td>
         <td>{{$value->ReferencesCategory->name}}</td>

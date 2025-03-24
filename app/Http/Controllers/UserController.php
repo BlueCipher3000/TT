@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -54,7 +55,7 @@ class UserController extends Controller
         if ($user) {
             if ($image)
                 $image->move(public_path('storage/imgusers'), $imgName);
-            return redirect()->route('qlkhachhang.index');
+            return redirect()->route('qlkhachhang.index')->with('success', 'Thêm user mới thành công');
         } else {
             return back()->with('error', 'Thêm user mới thất bại');
         }
@@ -73,6 +74,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (!Gate::allows('manage-users', $user)) {
+            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không thể chỉnh sửa tài khoản này.');
+        }
         return view('usermanager.suakhachhang', compact('user'));
     }
 
@@ -81,6 +85,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (!Gate::allows('manage-users', $user)) {
+            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không thể cập nhật tài khoản này.');
+        }
         // Validate input data
         /* $request->validate([
             'username' => 'required|string|max:50',
@@ -121,7 +128,7 @@ class UserController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('qlkhachhang.index')->with('success', 'User updated successfully');
+        return redirect()->route('qlkhachhang.index')->with('success', 'Cập nhật user thành công');
     }
 
 
@@ -130,9 +137,12 @@ class UserController extends Controller
      */
     public function destroy(User $user) //name tham số truyền vào phải trùng với tên tham số trong route list
     {
-        //
+        if (!Gate::allows('manage-users', $user)) {
+            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không có quyền xóa user này');
+        }
+
         $user->delete();
-        return redirect()->route('qlkhachhang.index');
+        return redirect()->route('qlkhachhang.index')->with('success', 'Xóa user thành công');
     }
     public function find(Request $request)
     {
@@ -140,5 +150,56 @@ class UserController extends Controller
             $result = User::where('name', 'like', $request->name)->get();
             return view('usermanager.qluser', compact('result'));
         }
+    }
+
+    public function editProfile()
+    {
+        return view('profile.edit', ['user' => auth()->user()]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(auth()->id());
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'gender' => 'nullable|in:0,1',
+            'img' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'current_password' => ['nullable', 'required_with:new_password', function ($attribute, $value, $fail) use ($user) {
+                if ($value !== $user->password) {
+                    $fail('Mật khẩu hiện tại không đúng.');
+                }
+            }],
+            'new_password' => 'nullable|min:8|different:current_password',
+            'confirm_password' => 'nullable|same:new_password'
+        ]);
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $imgName = time() . '_' . $image->getClientOriginalName(); // Avoid overwriting files
+
+            // Ensure the storage directory exists
+            $filePath = public_path('storage/imgusers');
+            if (!File::exists($filePath)) {
+                File::makeDirectory($filePath, 0755, true, true);
+            }
+
+            // Move the uploaded image
+            $image->move($filePath, $imgName);
+
+            // Assign new image to user
+            $user->img = $imgName;
+        }
+        if ($request->filled('new_password')) {
+            $user->password = $request->new_password; // No hashing for now
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'gender' => $request->gender !== "" ? (int) $request->gender : null,
+            'password' => $user->password,
+            'img' => $user->img,
+        ]);
+
+        return redirect()->route('profile.edit')->with('success', 'Cập nhật thông tin cá nhân thành công');
     }
 }
