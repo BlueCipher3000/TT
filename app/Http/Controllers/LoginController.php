@@ -19,7 +19,7 @@ class LoginController extends Controller
         $user = User::where('username', $request->username)->first();
 
         if (!$user || $request->password !== $user->password) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return back()->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác');
         }
 
         Auth::login($user);

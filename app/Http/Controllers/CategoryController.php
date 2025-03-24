@@ -74,7 +74,7 @@ class CategoryController extends Controller
         //kiểm tra tên file (validate)
         $updated = $category->update([
             'name' => $request->name,
-            'describe'=> $request->description,
+            'description'=> $request->description,
             'img' => $imgName,
             'status' => $request->status,
         ]);
