@@ -19,12 +19,12 @@ class LoginController extends Controller
         $user = User::where('username', $request->username)->first();
 
         if (!$user || $request->password !== $user->password) {
-            return back()->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác');
+            return back()->withInput()->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác');
         }
 
         Auth::login($user);
 
-        return redirect()->route('admin.quantri');
+        return redirect()->route('admin.dashboard');
 
     }
 

@@ -29,7 +29,6 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            'id' => 0,
             'username' => 'root',
             'name' => 'Root',
             'gender' => null,
@@ -40,7 +39,7 @@ return new class extends Migration
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::statement('ALTER TABLE users AUTO_INCREMENT = 1');
+        // DB::statement('ALTER TABLE users AUTO_INCREMENT = 1');
         // DB::statement('ALTER TABLE users ADD CONSTRAINT chk_privilege CHECK (privilege >= 1 OR id = 0)');
     }
 

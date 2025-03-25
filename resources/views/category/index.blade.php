@@ -1,6 +1,6 @@
 @extends('Layout.layout')
 @section('namebuttonadd')
-<form action="{{route('qldanhmuc.find')}}" method="GET">
+<form action="{{route('category.find')}}" method="GET">
     @csrf
     <input type="text" name="name" placeholder="Nhập tên danh mục" required>
     <button class="btn-search">Tìm kiếm</button>

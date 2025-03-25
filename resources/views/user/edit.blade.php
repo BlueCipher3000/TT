@@ -129,7 +129,7 @@
                 <option value="0">Khóa</option>
             </select>
             <div>
-                <a class="btn" href="{{route('qlkhachhang.index')}}">Quay lại</a>
+                <a class="btn" href="{{route('user.index')}}">Quay lại</a>
                 <button class="btn" type="submit">Đồng ý</button>
             </div>
         </form>

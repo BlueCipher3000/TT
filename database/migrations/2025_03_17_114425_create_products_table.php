@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('sale');
             $table->integer('hot');
             $table->text('description')->nullable();
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->text('content')->nullable();
             $table->boolean('status');
             $table->integer('total_pay');

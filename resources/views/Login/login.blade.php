@@ -119,11 +119,11 @@
         </div>
     @endif
     <!-- Nút đăng ký -->
-    <div class="register-container" style="display: none;">
+    {{-- <div class="register-container" style="display: none;">
         <form action="{{route('register')}}" method="GET">
             <button class="register-button">Đăng ký</button>
         </form>
-    </div>
+    </div> --}}
 
     <div class="login-container">
         <h2>Đăng nhập</h2>
@@ -131,14 +131,14 @@
             @csrf
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" value="{{ old('username', request()->username) }}" required>
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu:</label>
                 <input type="password" id="password" name="password" required>
-                <div class="forgot-password">
-                    <a href="{{route('forgotpassword.index')}}">Quên mật khẩu?</a>
-                </div>
+                {{-- <div class="forgot-password">
+                    <a href="{{route('/login')}}">Quên mật khẩu?</a>
+                </div> --}}
             </div>
             @if ($errors->has('login'))
                         <div style="background-color: #ffebee; /* Nền đỏ nhạt */

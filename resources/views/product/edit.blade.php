@@ -37,7 +37,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Hình ảnh</label>
-                <input type="file" class="form-control" name="img" accept="image/*" required>
+                <input type="file" class="form-control" name="img" accept="image/*">
             </div>
             <div class="mb-3">
                 <label class="form-label">Nội dung</label>
@@ -72,7 +72,7 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-primary">Sửa</button>
-                <a href="{{route('qlsanpham.index')}}" class="btn btn-secondary">Quay lại</a>
+                <a href="{{route('product.index')}}" class="btn btn-secondary">Quay lại</a>
             </div>
         </form>
     </div>

@@ -60,7 +60,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu</button>
-            <a class="btn btn-primary" href="{{ route('admin.quantri') }}">Quay lại</a>
+            <a class="btn btn-primary" href="{{ route('admin.dashboard') }}">Quay lại</a>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

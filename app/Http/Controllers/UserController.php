@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         //
         $users = User::orderBy('id', 'ASC')->paginate(10);
-        return view('usermanager.qluser', compact('users'));
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
     public function create() //trả về view thêm mới khách hàng
     {
         $result = User::all();
-        return view('usermanager.themkhachhang', compact('result'));
+        return view('user.add', compact('result'));
     }
 
     /**
@@ -72,7 +72,7 @@ class UserController extends Controller
                 $image->move($filePath, $imgName);
             }
 
-            return redirect()->route('qlkhachhang.index')->with('success', 'Thêm user mới thành công');
+            return redirect()->route('user.index')->with('success', 'Thêm user mới thành công');
         } else {
             return back()->with('error', 'Thêm user mới thất bại');
         }
@@ -92,9 +92,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if (!Gate::allows('manage-users', $user)) {
-            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không thể chỉnh sửa tài khoản này.');
+            return redirect()->route('user.index')->with('error', 'Bạn không thể chỉnh sửa tài khoản này.');
         }
-        return view('usermanager.suakhachhang', compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         if (!Gate::allows('manage-users', $user)) {
-            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không thể cập nhật tài khoản này.');
+            return redirect()->route('user.index')->with('error', 'Bạn không thể cập nhật tài khoản này.');
         }
         // Validate input data
         $request->validate([
@@ -152,8 +152,12 @@ class UserController extends Controller
             'privilege' => $request->privilege,
             'status' => $request->status,
         ]);
-
-        return redirect()->route('qlkhachhang.index')->with('success', 'Cập nhật user thành công');
+        if ($user) {
+            return redirect()->route('user.index')->with('success', 'Cập nhật user thành công');
+        }
+        else {
+            return back()->with('error', 'Cập nhật user thất bại');
+        }
     }
 
 
@@ -163,17 +167,17 @@ class UserController extends Controller
     public function destroy(User $user) //name tham số truyền vào phải trùng với tên tham số trong route list
     {
         if (!Gate::allows('manage-users', $user)) {
-            return redirect()->route('qlkhachhang.index')->with('error', 'Bạn không có quyền xóa user này');
+            return redirect()->route('user.index')->with('error', 'Bạn không có quyền xóa user này');
         }
 
         $user->delete();
-        return redirect()->route('qlkhachhang.index')->with('success', 'Xóa user thành công');
+        return redirect()->route('user.index')->with('success', 'Xóa user thành công');
     }
     public function find(Request $request)
     {
         if (isset($request->name)) {
-            $result = User::where('name', 'like', $request->name)->get();
-            return view('usermanager.qluser', compact('result'));
+            $users = User::where('name', 'like', $request->name)->get();
+            return view('user.index', compact('users'));
         }
     }
 

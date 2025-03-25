@@ -1,11 +1,11 @@
 @extends('Layout.layout')
 @section('namebuttonadd')
-<form action="{{route('qlkhachhang.find')}}" method="GET">
+<form action="{{route('user.find')}}" method="GET">
     @csrf
     <input type="text" name="name" placeholder="Nhập tên đăng nhập của người dùng" required>
     <button class="btn-search">Tìm kiếm</button>
 </form>
-<form action="{{route('themkhachhang')}}" method="GET">
+<form action="{{route('user.add')}}" method="GET">
     <button class="btn-green">+ Thêm user mới</button>
 </form>
 @endsection

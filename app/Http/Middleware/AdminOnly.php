@@ -19,6 +19,6 @@ class AdminOnly
         if (Auth::check() && (Auth::user()->privilege == 1 || Auth::user()->privilege == 0)) {
             return $next($request);
         }
-        return redirect()->route('admin.quantri')->with('error', 'Bạn không có quyền truy cập');
+        return redirect()->route('admin.dashboard')->with('error', 'Bạn không có quyền truy cập');
     }
 }

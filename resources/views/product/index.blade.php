@@ -1,6 +1,6 @@
 @extends('Layout.layout')
 @section('namebuttonadd')
-<form action="{{route('qlsanpham.find')}}" method="GET">
+<form action="{{route('product.find')}}" method="GET">
     @csrf
     <input type="text" name="name" placeholder="Nhập tên sản phẩm" required>
     <button class="btn-search">Tìm kiếm</button>

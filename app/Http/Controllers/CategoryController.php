@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $result = Category::paginate(10);
-        return view('categorymanager.qldanhmuc',compact('result'));
+        return view('category.index',compact('result'));
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function create()
     {
         $result = Category::all();
-        return view('categorymanager.themdanhmuc', compact('result'));
+        return view('category.add', compact('result'));
     }
 
     /**
@@ -35,14 +35,14 @@ class CategoryController extends Controller
         //kiểm tra tên file (validate)
         $category = Category::create([
             'name' =>$request->name,
-            'describe'=> $request->description,
+            'description'=> $request->description,
             'img' => $imgName,
             'status' => $request->status,
         ]);
         if($category){
             if ($image)
                 $image->move(public_path('storage/imgcategories'), $imgName);
-            return redirect()->route('qldanhmuc.index')->with('success','Thêm mới thành công');
+            return redirect()->route('category.index')->with('success','Thêm mới thành công');
         }else{
             return back()->with('error','Thêm mới thất bại');
         }
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categorymanager.suadanhmuc',compact('category'));
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         if($updated){
             if ($image)
                 $image->move(public_path('storage/imgcategories'), $imgName);
-            return redirect()->route('qldanhmuc.index')->with('success','Cập nhật thành công');
+            return redirect()->route('category.index')->with('success','Cập nhật thành công');
         }else{
             return back()->with('error','Cập nhật thất bại');
         }
@@ -94,11 +94,11 @@ class CategoryController extends Controller
     {
         //
         $category->delete();
-        return redirect()->route('qldanhmuc.index');
+        return redirect()->route('category.index');
     }
 
     public function Find(Request $request){
         $result = Category::where('name','LIKE',$request->name)->get();
-        return view('categorymanager.qldanhmuc',compact('result'));
+        return view('category.index',compact('result'));
     }
 }
