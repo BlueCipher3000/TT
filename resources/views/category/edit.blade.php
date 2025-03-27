@@ -30,7 +30,13 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        button {
+        div {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .btn {
             background: #28a745;
             color: #fff;
             border: none;
@@ -39,31 +45,43 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        button:hover {
+        .btn:hover {
             background: #218838;
+        }
+
+        a {
+            text-decoration: none;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 13.3333px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Nhập Danh Mục</h2>
-        <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('category.update',$category)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <label for="name">Tên danh mục:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" value="{{$category->name}}" required>
 
             <label for="description">Mô tả:</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" >{{$category->description}}</textarea>
 
             <label for="img">Hình Ảnh:</label>
             <input type="file" id="img" name="img">
 
             <label for="status">Trạng thái:</label>
             <select id="status" name="status">
-                <option value="1">Hoạt động</option>
-                <option value="0">Không hoạt động</option>
+                <option value="1" {{$category->status == 1 ? 'Selected':''}}>Hoạt động</option>
+                <option value="0" {{$category->status == 0 ? 'Selected':''}}>>Không hoạt động</option>
             </select>
-            <button>Lưu</button>
+            <div>
+                <button class="btn" type="submit">Lưu</button>
+                <a class="btn" href="{{route('category.index')}}">Quay lại</a>
+            </div>
         </form>
     </div>
 </body>

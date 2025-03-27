@@ -32,11 +32,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Mô tả</label>
-                <input type="text" class="form-control" name="discribe">
+                <input type="text" class="form-control" name="description">
             </div>
             <div class="mb-3">
                 <label class="form-label">Hình ảnh</label>
-                <input type="file" class="form-control" name="img" accept="image/*" required>
+                <input type="file" class="form-control" name="img" accept="image/*">
             </div>
             <div class="mb-3">
                 <label class="form-label">Nội dung</label>
@@ -51,7 +51,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Số lượng bán ra</label>
-                <input type="number" class="form-control" name="toyal_pay">
+                <input type="number" class="form-control" name="total_pay">
             </div>
             <div class="mb-3">
                 <label class="form-label">Số lượng đánh giá</label>
@@ -69,7 +69,10 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+            <div>
+                <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+                <a href="{{route('product.index')}}" class="btn btn-secondary">Quay lại</a>
+            </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

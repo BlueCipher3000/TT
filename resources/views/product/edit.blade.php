@@ -33,11 +33,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Mô tả</label>
-                <input type="text" class="form-control" name="discribe" value="{{$product->discribe}}">
+                <input type="text" class="form-control" name="description" value="{{$product->description}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Hình ảnh</label>
-                <input type="file" class="form-control" name="img" accept="image/*" required>
+                <input type="file" class="form-control" name="img" accept="image/*">
             </div>
             <div class="mb-3">
                 <label class="form-label">Nội dung</label>
@@ -70,7 +70,10 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Sửa</button>
+            <div>
+                <button type="submit" class="btn btn-primary">Sửa</button>
+                <a href="{{route('product.index')}}" class="btn btn-secondary">Quay lại</a>
+            </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

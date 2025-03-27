@@ -24,9 +24,8 @@
         <div class="mb-3">
             <label class="form-label">Giới tính</label>
             <select name="gender" class="form-control" required>
-                <option value="1">Nam</option>
-                <option value="2">Nữ</option>
-                <option value="3">Khác</option>
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
             </select>
         </div>
 
@@ -37,7 +36,7 @@
 
         <div class="mb-3">
             <label class="form-label">Số điện thoại</label>
-            <input type="text" name="phone" class="form-control" required>
+            <input type="text" name="phone" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -52,7 +51,7 @@
 
         <div class="mb-3">
             <label class="form-label">Địa chỉ</label>
-            <input type="text" name="address" class="form-control" required>
+            <input type="text" name="address" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -60,7 +59,7 @@
             <input type="file" name="img" class="form-control">
         </div>
         <input type="hidden" name="role" value="0">
-        <input type="hidden" name="statu" value="1">
+        <input type="hidden" name="status" value="1">
 
         <button type="submit" class="btn btn-primary">Đăng ký</button>
     </form>
