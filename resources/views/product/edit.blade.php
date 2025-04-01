@@ -50,7 +50,7 @@
                     <option value="1" {{$product->status == 1 ? 'Selected':''}}>Hiển thị</option>
                 </select>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Số lượng bán ra</label>
                 <input type="number" class="form-control" name="toyal_pay" value="{{$product->toyal_pay}}">
             </div>
@@ -61,7 +61,7 @@
             <div class="mb-3">
                 <label class="form-label">Tổng số sao</label>
                 <input type="number" class="form-control" name="total_stars" value="{{$product->total_stars}}">
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <label class="form-label">Danh mục</label>
                 <select class="form-control" name="category_id">

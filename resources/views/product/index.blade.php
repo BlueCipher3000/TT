@@ -16,13 +16,13 @@
         <th>Giá</th>
         <th>Giảm giá</th>
         <th>Sản phẩm hot</th>
-        <th>Mô tả</th>
+        {{-- <th>Mô tả</th> --}}
         <th>Hình ảnh</th>
-        <th>Nội dung</th>
+        {{-- <th>Nội dung</th> --}}
         <th>Trạng thái</th>
-        <th>Số lượng bán</th>
+        {{-- <th>Số lượng bán</th>
         <th>Số lượng đánh giá</th>
-        <th>Tổng số sao</th>
+        <th>Tổng số sao</th> --}}
         <th>Danh mục</th>
         <th>Hành động</th>
     </tr>
@@ -34,24 +34,24 @@
         <td>{{$value->price}} đ</td>
         <td>{{$value->sale}}%</td>
         <td>{{$value->hot == 0 ? 'Không' : 'Có'}}</td>
-        <td>{{$value->description}}</td>
+        {{-- <td>{{$value->description}}</td> --}}
         <td><img src="{{asset('storage/imgproducts/'.$value->img)}}" alt="Hình ảnh"
             style="max-width: 150px;height: auto;display: block;margin: auto;"></td>
-        <td>{{$value->content}}</td>
+        {{-- <td>{{$value->content}}</td> --}}
         <td>{{$value->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
-        <td>{{$value->total_pay}}</td>
+        {{-- <td>{{$value->total_pay}}</td>
         <td>{{$value->total_rating}}</td>
-        <td>{{$value->total_stars}}</td>
+        <td>{{$value->total_stars}}</td> --}}
         <td>{{$value->ReferencesCategory->name}}</td>
         <td>
             <form action="{{route('product.edit',$value)}}" method="GET">
                 @csrf
-                <button class="btn-blue">Edit</button>
+                <button class="btn-blue">Sửa</button>
             </form>
-            <form action="{{route('product.destroy', $value)}}" method="POST">
+            <form action="{{route('product.destroy', $value)}}" method="POST" onsubmit="return confirmDelete(event)">
                 @csrf
                 @method('DELETE')
-                <button style="margin-top: 5px" class="btn-red">Delete</button>
+                <button style="margin-top: 5px" class="btn-red">Xóa</button>
             </form>
         </td>
     </tr>
