@@ -101,4 +101,9 @@ class CategoryController extends Controller
         $result = Category::where('name','LIKE',$request->name)->get();
         return view('category.index',compact('result'));
     }
+
+    public function getCategories()
+    {
+        return response()->json(Category::all());
+    }
 }

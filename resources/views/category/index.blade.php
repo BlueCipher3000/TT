@@ -12,11 +12,11 @@
 @section('content')
     <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Desciption</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Tên</th>
+                    <th>Mô tả</th>
+                    <th>Ảnh</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,16 +25,16 @@
                     <td>{{$value->name}}</td>
                     <td>{{$value->description}}</td>
                     <td><img style="max-width: 150px;height: auto;display: block;margin: auto;"src="{{asset('storage/imgcategories/'.$value->img)}}" alt=""></td>
-                    <td>{{$value->status}}</td>
+                    <td>{{$value->status ? "Hoạt động" : "Không hoạt động"}}</td>
                     <td>
                         <form action="{{route('category.edit',$value)}}" method="GET">
                             @csrf
-                            <button class="btn-blue">Edit</button>
+                            <button class="btn-blue">Sửa</button>
                         </form>
-                        <form action="{{route('category.destroy', $value)}}" method="POST">
+                        <form action="{{route('category.destroy', $value)}}" method="POST" onsubmit="return confirmDelete(event)">
                             @csrf
                             @method('DELETE')
-                            <button style="margin-top: 5px" class="btn-red">Delete</button>
+                            <button style="margin-top: 5px" class="btn-red">Xóa</button>
                         </form>
                     </td>
                 </tr>

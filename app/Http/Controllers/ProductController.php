@@ -167,4 +167,23 @@ class ProductController extends Controller
         $result = Product::where('name', 'LIKE', $request->name)->get();
         return view('product.index', compact('result'));
     }
+
+    public function getProducts()
+    {
+        $products = Product::with('ReferencesCategory')->get(); // Eager load category
+
+        return response()->json($products);
+    }
+
+
+    public function getProductById($id)
+    {
+        $product = Product::with('ReferencesCategory')->find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Không tìm thấy sản phẩm'], 404);
+        }
+        return response()->json($product);
+    }
 }
+
