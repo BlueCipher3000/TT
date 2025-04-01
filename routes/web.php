@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\ClassLike;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +38,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
     Route::resources([
         'user' => UserController::class,
         'category' => CategoryController::class,
         'product' => ProductController::class,
+        'order' => OrderController::class,
     ]);
 });
 
@@ -79,6 +85,3 @@ Route::get('/email', [EmailController::class, 'sendemail'])->name('email.sendema
 Route::fallback(function () {
     return view('errors.404');
 });
-
-
-

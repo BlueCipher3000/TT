@@ -130,7 +130,7 @@
 
         a {
             font-family: sans-serif;
-            color: rgb(91, 24, 122);
+            color: #1abc9c;
             text-decoration: none;
         }
 
@@ -268,7 +268,8 @@
         </div>
         <ul>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;"
-                    class="{{request()->is('') || request()->is()}}">Quản lý khách hàng</a></li>
+                    class="{{request()->is('orders') || request()->is('orders/*') ? 'active' : ''}}"
+                    href="{{route('orders.index')}}">Quản lý đơn hàng</a></li>
             <li><a style="height: 100%; width: 100%; margin-top: 20px;"
                     class="{{request()->is('category') || request()->is('category/*') ? 'active' : ''}}"
                     href="{{route('category.index')}}">Quản lý danh mục</a></li>
